@@ -1,0 +1,4 @@
+Requires the following libraries:
+
+  /libraries/jquery-ui/*
+  /libraries/jquery.js
