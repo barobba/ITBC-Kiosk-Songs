@@ -1,31 +1,23 @@
-
-
-/*div#unique-id {  
+#songs .song {
+  margin: .25em;
+  background-color: rgb(230,230,230);
+  border: 1px solid black;
+  padding: 1em;
+  width: 200px;
+  float: left;
 }
 
-div.box {
-  border: 4px outset gray;
-  border-radius: 1em;
-  -moz-border-radius: 1em;
-  width: 100px;
-  height: 70px;
-  text-align: center;
-  vertical-align: bottom;
-  padding-top: 30px;
+#songs .song .label {
+  display: none;
 }
 
-.reference-links {
-  margin: 1em 0em;
-  padding-bottom: 1em;
-  border-bottom: 1px solid gray;
-}
-
-.type1 {
-  background-color: red;
-}
-
-.type2 {
-  background-color: blue;
-  color: white;
+#songs .song .song-title {
+  margin-top: 1em;
   font-weight: bold;
-}*/
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#songs .song .song-posted-by {
+  font-size: .8em;
+}
