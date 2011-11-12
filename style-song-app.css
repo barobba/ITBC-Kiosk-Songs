@@ -1,0 +1,31 @@
+
+#song-app #song-app-layout {
+  width: 90%;
+}
+
+#song-app #song-app-layout-left {
+  width: 225px;
+}
+
+#song-app #song-app-layout-right {
+}
+
+#song-app #song-list-container {
+  margin: .5em;
+  border: 1px solid black;
+  padding: .5em;
+  background-color: rgb(230,230,230);
+}
+
+#song-app #song-container {
+  margin: 1em;
+  border: 1px solid black;
+  padding: .5em;
+  background-color: rgb(230,230,230);
+}
+
+/*
+#song-app #hidden-parts {
+  display: none;
+}
+*/

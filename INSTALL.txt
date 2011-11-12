@@ -1,3 +1,7 @@
+Requires the following song file:
+
+  /data/songs.json
+
 Requires the following libraries:
 
   /libraries/jquery-ui/*

@@ -5,11 +5,70 @@
 <script src="app.js"></script>
 
 <!-- STYLESHEETS -->
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="style-extras.css" />
+<link rel="stylesheet" href="style-clearfix.css" />
+<link rel="stylesheet" href="style-old.css" />
+<link rel="stylesheet" href="style-song-app.css" />
+<link rel="stylesheet" href="style-song-list-item.css" />
+<link rel="stylesheet" href="style-song.css" />
 
 <!-- PAGE -->
 
-<h1 id="site-title">Kiosk</h1>
+<div id="song-app">
 
-<h2 id="page-title">Songs</h2>
-<div id="songs"></div>
+  <table id="song-app-layout">
+    <tr>
+      <td id="song-app-layout-left">
+
+        <div id="song-list-container" class="clearfix">
+          <h1>List of songs</h1>
+        </div>
+
+      </td>
+      <td id="song-app-layout-right">
+      
+        <div id="song-container">
+          <div id="song-container-header">
+            <h1>Curent song</h1>
+          </div>
+          <div id="song-container-element">
+            <p>SONG GOES HERE</p>
+          </div>
+          <div id="song-container-footer"></div>
+        </div>
+    
+      </td>
+    </tr>
+  </table>
+
+  <div id="hidden-parts" class="hidden" class="clearfix">
+
+    <h1>Hidden parts</h1>
+
+    <div class="song-list-item">
+      <!-- SONG MENU ITEM -->
+      <div class="title">TITLE</div>
+    </div>
+    
+    <div class="song">
+      <!-- SONG -->
+      <div class="player">PLAYER</div>
+      <div class="title">TITLE</div>
+      <div class="posted-by">POSTED-BY</div>
+      <div class="notes">NOTES</div>
+    </div>
+
+  </div>
+  
+</div>
+
+
+
+
+
+
+
+
+<div id="songs" class="clearfix">
+  <h1>OLD SONGS DIVIDER TAG</h1>
+</div>
