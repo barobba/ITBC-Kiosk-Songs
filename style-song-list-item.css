@@ -1,6 +1,11 @@
 
 .song-list-item {
   margin: .5em;
-  border: 1px solid black;
   background-color: rgb(230,230,230);
 }
+
+.song-list-item {
+  color: blue;
+  text-decoration: underline;
+}
+

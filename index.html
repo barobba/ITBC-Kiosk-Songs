@@ -5,9 +5,9 @@
 <script src="app.js"></script>
 
 <!-- STYLESHEETS -->
-<link rel="stylesheet" href="style-extras.css" />
 <link rel="stylesheet" href="style-clearfix.css" />
-<link rel="stylesheet" href="style-old.css" />
+<link rel="stylesheet" href="style-page.css" />
+<link rel="stylesheet" href="style-extras.css" />
 <link rel="stylesheet" href="style-song-app.css" />
 <link rel="stylesheet" href="style-song-list-item.css" />
 <link rel="stylesheet" href="style-song.css" />
@@ -18,19 +18,16 @@
 
   <table id="song-app-layout">
     <tr>
-      <td id="song-app-layout-left">
+      <td id="song-app-layout-left" class="song-app-layout-column">
 
         <div id="song-list-container" class="clearfix">
-          <h1>List of songs</h1>
         </div>
 
       </td>
-      <td id="song-app-layout-right">
+      <td id="song-app-layout-right" class="song-app-layout-column">
       
         <div id="song-container">
-          <div id="song-container-header">
-            <h1>Curent song</h1>
-          </div>
+          <div id="song-container-header"></div>
           <div id="song-container-element">
             <p>SONG GOES HERE</p>
           </div>
@@ -52,23 +49,21 @@
     
     <div class="song">
       <!-- SONG -->
-      <div class="player">PLAYER</div>
-      <div class="title">TITLE</div>
-      <div class="posted-by">POSTED-BY</div>
-      <div class="notes">NOTES</div>
+      <div class="song-player">
+        <div class="label">AUDIO PLAYER</div>
+      </div>
+      <h2 class="song-title">TITLE</h2>
+      <div class="song-lyrics">LYRICS</div>
+      <div class="song-posted-by">POSTED-BY</div>
+      <div class="song-notes">NOTES</div>
+      <div class="song-id">ID</div>
+    </div>
+    
+    <div class="posted-by">
+      <div class="posted-by-picture">PICTURE</div>
+      <div class="posted-by-full-name">FULL NAME</div>
     </div>
 
   </div>
   
-</div>
-
-
-
-
-
-
-
-
-<div id="songs" class="clearfix">
-  <h1>OLD SONGS DIVIDER TAG</h1>
 </div>

@@ -1,74 +1,113 @@
 
-// MAIN()
-// THIS STARTS AFETER EVERYTHING ON THE PAGE IS LOADED
+var songData;
+var audioPlayer;
+
 $(document).ready( function () {
 
-  // PROGRAM GOES HERE
-
-  // Sample programming...
-  //alert('about to make changes');
-
-  // Show the hidden parts
-  //$('#hidden-parts').toggleClass('hidden');
-  
-  // Copy an item to the song list container
-  var item1 = $('#hidden-parts .song-list-item').clone().addClass('SOME-UNIQUE-ID');
-  item1.appendTo('#song-list-container');
-
-  var item2 = $('#hidden-parts .song-list-item').clone();
-  item2.addClass('SOME-UNIQUE-ID');
-  item2.appendTo('#song-list-container');
-  
-  // Copy an item to the song container
-  var currentSong = $('#hidden-parts .song').clone();
-  var songContainer = $('#song-container-element').children();
-  currentSong.replaceAll(songContainer);
-  
-  //alert('finished making changes');
-
   //
-  // This is the data file
-  // YOU MIGHT NEED TO PLACE IT IN THE RIGHT FOLTER
-  // OR, CHANGE THE FILE PATH (TO A REMOTE URL FOR EXAMPLE)
+  // Retrieve the song data, and place it on the page
   //
   
-  var song_url = "./data/songs.json";
-
-  //
-  // Run script to display song data
-  //    
-  
-  var song_callback = function(data) {
-    $.each(data.nodes, function(index, song_record) { 
-      var song = song_record.node;
-      if (index < 10) {
-        // For testing, we're limiting the number of songs to display
+  var song_url = "packs/_data.json";
+  $.ajax( song_url, {
+    dataType: 'json', 
+    success: function(data) {
+      var songData = data;
       
-        // alert(index+' : '  + song.title +'  :  ' + song.field_song_audio_value); 
+      $.each(songData.songs, function(index, songRecord) {
         
-        // Song element
-        var songTheme = $('<div class="song" />');
-        songTheme.appendTo('#songs');
+        //
+        // For each song
+        //
+        
+        // Get song data
+	      var song = songRecord;
+    
+	      // Add song to list of songs
+	      var songItem = themeSongItem(song, index);
+        songItem.appendTo('#song-list-container');
 
-        // Song player
-        var songPlayer = $('<div class="song-player"><span class="label label-player"></span> <span class="song-player"><object id=player" name="player" width="23" height="12">' + '<param name="movie" value="http://liveandtell.com/sites/liveandtell.com/modules/audio/player.swf?filename=' + song.field_song_audio_value +'">' + '<param name="wmode" value="transparent"><embed id="player" name="player" type="application/x-shockwave-flash" ' + 'wmode="transparent" src="http://liveandtell.com/sites/liveandtell.com/modules/audio/player.swf?filename=' + song.field_song_audio_value + '"width="23" height="12"></object></div>');
-        songPlayer.appendTo(songTheme);
+        // Add click event handler, so this song will be displayed when clicked
+        songItem.click(function(){
+          actionReplaceSong(song, index);
+        });
         
-        // Song title
-        var songTitle = $('<div class="song-title"><span class="label label-song-title">Title: </span> <span class="song-title">'+ song.title +'</span></div>');
-        songTitle.appendTo(songTheme);
-        
-        // Song posted by
-        var songPostedBy = $('<div class="song-posted-by"><span class="label label-artist">Posted by:</span> <span class="song-artist">' + song.name +'</span></div>').appendTo(songTheme);
-        
-        
-      } // end if
+      });
       
-    }); // end $.each
-    
-  }; // end song_callback
+      // Display the first song
+      var firstSongIndex = 0;
+      actionReplaceSong(songData.songs[firstSongIndex], firstSongIndex);
+      
+    }
+  });
   
-  // Make ajax call
-  $.ajax(song_url, {dataType: 'json', success: song_callback});
-    
 });
+
+function actionReplaceSong(song, index) {
+  
+  //
+  // Replace the current song with the given selection
+  //
+  
+  var currentSong = themeCurrentSong(song, index);
+  $('#song-container #song-container-element').html(currentSong);
+  
+  //
+  // Add the "play/stop" event
+  //
+  
+  currentSong.children('.song-player').click(function(){
+    
+    $(this).toggleClass('song-player-playing');
+    if ($(this).hasClass('song-player-playing')) {
+      document.getElementById('audio-player-object').play()
+    }
+    else {
+      document.getElementById('audio-player-object').pause()
+      document.getElementById('audio-player-object').currentTime = 0;
+    }
+  });
+  
+  // Add the "onended" event handler
+  document.getElementById('audio-player-object').onended = function(){
+    currentSong.children('.song-player').removeClass('song-player-playing');
+  }
+
+}
+
+function themeSongItem(song, index) {
+  var songItem = $('#hidden-parts .song-list-item').clone();
+  songItem.attr('id', index);
+  songItem.children('.title').html(song.title);
+  return songItem;
+}
+
+function themeCurrentSong(song, index) {
+  var currentSong = $('#hidden-parts .song').clone();
+  currentSong.attr('id', index);
+  currentSong.children('.song-player').prepend(themeAudioPlayer('packs/'+song.songAudio.audioID+'.ogg'));
+  //currentSong.children('.song-player').prepend(themeAudioPlayer(song.field_song_audio_value+'.ogg'));
+  currentSong.children('.song-title').html(song.title);
+  currentSong.find('.song-lyrics').html(song.songLyrics ? song.songLyrics : '');
+  currentSong.children('.song-posted-by').html(song.name);
+  currentSong.children('.song-notes').html(song.songNotes ? song.songNotes : '');
+  currentSong.children('.song-id').html(song.NID);
+  return currentSong;
+}
+
+function themeAudioPlayer(sourceURL) {
+  
+  // Prepare audio tag
+  var audioTag = $('<audio id="audio-player-object" />');
+  audioTag.attr('preload', 'auto');
+
+  // Prepare source
+  var audioSource = $('<source />');
+  audioSource.attr('src', sourceURL).attr('type', 'audio/ogg');
+  
+  // Append audio with the source
+  audioTag.append(audioSource);
+  
+  var audioPlayer = audioTag;
+  return audioTag;
+}
