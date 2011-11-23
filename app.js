@@ -8,7 +8,7 @@ $(document).ready( function () {
   // Retrieve the song data, and place it on the page
   //
   
-  var song_url = "packs/_data.json";
+  var song_url = "packs_songs/_data.json";
   $.ajax( song_url, {
     dataType: 'json', 
     success: function(data) {
@@ -45,10 +45,7 @@ $(document).ready( function () {
 
 function actionReplaceSong(song, index) {
   
-  //
   // Replace the current song with the given selection
-  //
-  
   var currentSong = themeCurrentSong(song, index);
   $('#song-container #song-container-element').html(currentSong);
   
@@ -60,10 +57,10 @@ function actionReplaceSong(song, index) {
     
     $(this).toggleClass('song-player-playing');
     if ($(this).hasClass('song-player-playing')) {
-      document.getElementById('audio-player-object').play()
+      document.getElementById('audio-player-object').play();
     }
     else {
-      document.getElementById('audio-player-object').pause()
+      document.getElementById('audio-player-object').pause();
       document.getElementById('audio-player-object').currentTime = 0;
     }
   });
@@ -71,7 +68,7 @@ function actionReplaceSong(song, index) {
   // Add the "onended" event handler
   document.getElementById('audio-player-object').onended = function(){
     currentSong.children('.song-player').removeClass('song-player-playing');
-  }
+  };
 
 }
 
@@ -85,11 +82,11 @@ function themeSongItem(song, index) {
 function themeCurrentSong(song, index) {
   var currentSong = $('#hidden-parts .song').clone();
   currentSong.attr('id', index);
-  currentSong.children('.song-player').prepend(themeAudioPlayer('packs/'+song.songAudio.audioID+'.ogg'));
+  currentSong.children('.song-player').prepend(themeAudioPlayer('packs_songs/'+song.songAudio.audioID+'.ogg'));
   //currentSong.children('.song-player').prepend(themeAudioPlayer(song.field_song_audio_value+'.ogg'));
   currentSong.children('.song-title').html(song.title);
   currentSong.find('.song-lyrics').html(song.songLyrics ? song.songLyrics : '');
-  currentSong.children('.song-posted-by').html(song.name);
+  currentSong.children('.song-posted-by').html('Posted by ' + song.postedByFirstName + ' ' + song.postedByLastName);
   currentSong.children('.song-notes').html(song.songNotes ? song.songNotes : '');
   currentSong.children('.song-id').html(song.NID);
   return currentSong;

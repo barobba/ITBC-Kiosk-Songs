@@ -13,12 +13,11 @@
   display: none;
 }
 
-.song .song-player,
-.song .song-player .stopped {
+.song-player {
   background-image: url('media/audio_player_play.png');
 }
 
-.song .song-player-playing, /* This class is appended along with ".song-player" */
-.song .song-player .playing {
+.song-player.song-player-playing { /* This class is appended along with ".song-player" */
   background-image: url('media/audio_player_stop.png');
+	
 }
