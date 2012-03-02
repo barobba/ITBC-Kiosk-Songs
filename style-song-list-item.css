@@ -7,5 +7,6 @@
 .song-list-item {
   color: blue;
   text-decoration: underline;
+  cursor: pointer;
 }
 

@@ -7,6 +7,7 @@
 .song .song-player {
   width: 143;
   height: 143;
+  cursor: pointer;
 }
 
 .song .song-player .label {
