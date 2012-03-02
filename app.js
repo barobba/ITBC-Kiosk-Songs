@@ -83,9 +83,9 @@ function themeCurrentSong(song, index) {
   var currentSong = $('#hidden-parts .song').clone();
   currentSong.attr('id', index);
   currentSong.children('.song-player').prepend(themeAudioPlayer('packs_songs/'+song.songAudio.audioID+'.ogg'));
-  //currentSong.children('.song-player').prepend(themeAudioPlayer(song.field_song_audio_value+'.ogg'));
   currentSong.children('.song-title').html(song.title);
   currentSong.find('.song-lyrics').html(song.songLyrics ? song.songLyrics : '');
+  currentSong.find('.song-lyrics-translated').html(song.songTranslationLyrics ? song.songTranslationLyrics : '');
   currentSong.children('.song-posted-by').html('Posted by ' + song.postedByFirstName + ' ' + song.postedByLastName);
   currentSong.children('.song-notes').html(song.songNotes ? song.songNotes : '');
   currentSong.children('.song-id').html(song.NID);

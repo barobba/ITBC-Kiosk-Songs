@@ -22,3 +22,21 @@
   background-image: url('media/audio_player_stop.png');
 	
 }
+
+.song .song-lyrics {
+  background-color: rgb(215,215,215);
+  padding: 1em 2em;
+}
+
+.song .song-lyrics-translated {
+  border-left: 4px solid rgb(215,215,215);
+  padding-left: 2em;
+}
+
+
+
+
+
+
+
+
